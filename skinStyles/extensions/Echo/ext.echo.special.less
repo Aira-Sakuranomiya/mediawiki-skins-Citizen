@@ -9,7 +9,7 @@
  */
 
 // Disable sticky header since it collides with Echo sticky header
-#citizen-body-header-sticky-sentinel {
+#citizen-page-header-sticky-sentinel {
 	display: none;
 }
 
@@ -78,7 +78,8 @@
 		margin: 0;
 		margin-bottom: var( --space-md );
 		overflow-x: auto;
-		background: var( --background-color-overlay );
+		background-color: var( --color-surface-0 );
+		filter: opacity( 0.9 );
 		backdrop-filter: saturate( 50% ) blur( 16px );
 		border-bottom: 1px solid var( --border-color-base );
 		box-shadow: none;

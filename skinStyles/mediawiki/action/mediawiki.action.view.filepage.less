@@ -12,7 +12,7 @@
 @import '../../../resources/variables.less';
 
 // Custom sticky header handling
-#citizen-body-header-sticky-sentinel {
+#citizen-page-header-sticky-sentinel {
 	display: none;
 }
 
@@ -70,19 +70,19 @@
 		border-radius: var( --border-radius--pill );
 
 		&:hover {
-			color: #fff;
+			color: var( --color-inverted );
 			background-color: var( --color-primary--hover );
 		}
 
 		&:active {
-			color: #fff;
+			color: var( --color-inverted );
 			background-color: var( --color-primary--active );
 		}
 	}
 
 	// Current preview resolution
 	> .mw-thumbnail-link {
-		color: #fff;
+		color: var( --color-inverted );
 		background-color: var( --color-primary );
 	}
 }

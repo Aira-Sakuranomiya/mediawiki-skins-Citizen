@@ -1,4 +1,106 @@
 .citizen-menu {
+	font-size: var( --font-size-small );
+
+	&__card {
+		--transform-origin-offset-start: var( --space-xs );
+		--transform-origin-offset-end: ~'calc( 100% - var( --space-xs ) )';
+		margin: var( --space-xs );
+		overflow: auto;
+		overscroll-behavior: contain;
+		user-select: none;
+		background-color: var( --color-surface-1 );
+		border: 1px solid var( --border-color-base );
+		border-radius: var( --border-radius--medium );
+		box-shadow: var( --box-shadow-dialog );
+		transform: scale( 0 );
+		contain: content;
+
+		> * {
+			opacity: 0;
+		}
+	}
+
+	&__dropdown {
+		&Button {
+			cursor: pointer;
+
+			// Icons have to use span inside label elements
+			> span:not( .citizen-ui-icon ) {
+				.mixin-screen-reader-text;
+			}
+
+			&:hover {
+				background-color: var( --background-color-quiet--hover );
+
+				> .citizen-ui-icon::before {
+					opacity: var( --opacity-icon-base--hover );
+				}
+			}
+
+			&:active {
+				background-color: var( --background-color-quiet--active );
+
+				> .citizen-ui-icon::before {
+					opacity: var( --opacity-icon-base--active );
+				}
+			}
+
+			// Reset hover styles if it is a touch device
+			// This is dumb but hover:hover overrides active states
+			@media ( hover: none ) {
+				&:hover {
+					background-color: none;
+
+					.citizen-ui-icon::before {
+						opacity: var( --opacity-icon-base );
+					}
+				}
+			}
+		}
+
+		&[ open ] {
+			z-index: @z-index-overlay;
+
+			> .citizen-menu__card {
+				transition: var( --transition-menu );
+				transition-property: transform;
+				transform: none;
+
+				> * {
+					opacity: 1;
+					transition: var( --transition-menu );
+					transition-property: opacity;
+				}
+			}
+
+			> .citizen-menu__dropdownButton {
+				background-color: var( --background-color-quiet--active );
+
+				&:hover {
+					background-color: var( --background-color-quiet--hover );
+				}
+			}
+		}
+
+		@media ( max-width: @max-width-breakpoint-tablet ) {
+			// Dismiss affordnance overlay
+			&::before {
+				z-index: -1;
+				content: '';
+				background: var( --background-color-overlay );
+				opacity: 0;
+			}
+
+			&[ open ]::before {
+				position: fixed;
+				inset: 0;
+				opacity: 1;
+				transition: var( --transition-menu );
+				transition-property: opacity;
+			}
+		}
+	}
+
 	&__heading {
 		display: block;
 		padding: var( --space-xs ) var( --space-md );
@@ -7,6 +109,11 @@
 		font-weight: var( --font-weight-normal );
 		color: var( --color-base--subtle );
 		letter-spacing: 0.05em;
+	}
+
+	&__content-list {
+		margin: 0;
+		list-style: none;
 	}
 
 	.mw-list-item {
